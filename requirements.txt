@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+maia2
+python-chess
