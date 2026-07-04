@@ -55,7 +55,6 @@ def get_king_pos(fen: str, is_white: bool, is_self: bool) -> tuple:
                     col+=1
 
 def deprioritize_bomb_risks_medium(move_dist: dict, fen: str, king_pos: int) -> dict:
-    #make it pure just in case matters later for some reason...
     adjusted_move_dist = move_dist.copy()
     for move in move_dist.keys():
         origin, dest = move[:2], move[2:]
