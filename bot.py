@@ -1,6 +1,7 @@
 import maia
-import random 
+import random
 from fastapi import HTTPException
+from mine import select_mine
 
 def get_move(fen: str, difficulty: int):
     if difficulty == 0:
@@ -16,7 +17,8 @@ def get_move(fen: str, difficulty: int):
     bomb_risk_adjusted_move_dist = deprioritize_bomb_risks(maia_move_dist, fen, difficulty)
     #perhaps move dist renormalization should occur here instead of in select_move_from_dist...?
     move = select_move_from_dist(bomb_risk_adjusted_move_dist)
-    return move
+    mine = select_mine(fen, move)
+    return {"move": move, "mine": mine}
 
 def deprioritize_bomb_risks(move_dist: dict, fen: str, diff: int) -> dict:
     king_pos = get_king_pos_self(fen)
